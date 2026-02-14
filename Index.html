@@ -1,0 +1,200 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jesús 💖</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #ff758c, #ff7eb3);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .card {
+            background: white;
+            width: 360px;
+            padding: 25px;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+            position: relative;
+            z-index: 2;
+        }
+
+        img {
+            width: 100%;
+            border-radius: 15px;
+            margin-bottom: 15px;
+        }
+
+        h1 {
+            color: #e91e63;
+        }
+
+        .buttons {
+            margin-top: 20px;
+            height: 140px;
+            position: relative;
+        }
+
+        button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 25px;
+            font-size: 16px;
+            cursor: pointer;
+            position: absolute;
+            transition: 0.2s;
+        }
+
+        #yes {
+            background: #e91e63;
+            color: white;
+            left: 40px;
+            top: 50px;
+        }
+
+        #no {
+            background: #999;
+            color: white;
+            left: 200px;
+            top: 50px;
+        }
+
+        .mensaje {
+            margin-top: 15px;
+            font-weight: bold;
+            color: #e91e63;
+            display: none;
+        }
+
+        .final {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 50px;
+            font-weight: bold;
+            color: white;
+            text-align: center;
+            display: none;
+            z-index: 3;
+            animation: zoom 1s ease;
+        }
+
+        @keyframes zoom {
+            from {
+                transform: translate(-50%, -50%) scale(0.5);
+            }
+
+            to {
+                transform: translate(-50%, -50%) scale(1);
+            }
+        }
+
+        .heart {
+            position: absolute;
+            font-size: 25px;
+            animation: float 5s linear infinite;
+        }
+
+        @keyframes float {
+            from {
+                transform: translateY(100vh);
+            }
+
+            to {
+                transform: translateY(-10vh);
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="card">
+        <img src="foto.jpg" alt="Nosotros">
+        <h1>Jesús 💖</h1>
+        <p>¿Quieres ser mi San Valentín este 14 de febrero? 💌</p>
+
+        <div class="buttons">
+            <button id="yes" onclick="aceptar()">Sí 💘</button>
+            <button id="no">No 😒</button>
+        </div>
+
+        <div id="mensaje" class="mensaje">
+            ❌ No es opción 😌💕
+        </div>
+    </div>
+
+    <div id="final" class="final">
+        TE AMO JESÚS 💖😭
+    </div>
+
+    <!-- Música romántica -->
+    <audio autoplay loop>
+        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+    </audio>
+
+    <script>
+const botonNo = document.getElementById("no");
+const botonYes = document.getElementById("yes");
+const mensaje = document.getElementById("mensaje");
+const finalTexto = document.getElementById("final");
+
+let intentos = 0;
+
+function moverYContar() {
+    const card = document.querySelector(".card");
+
+    const maxX = card.clientWidth - botonNo.clientWidth;
+    const maxY = card.clientHeight - botonNo.clientHeight;
+
+    botonNo.style.left = Math.random() * maxX + "px";
+    botonNo.style.top = Math.random() * maxY + "px";
+
+    mensaje.style.display = "block";
+
+    botonYes.style.transform = "scale(" + (1 + intentos * 0.2) + ")";
+
+    intentos++;
+
+    if (intentos >= 5) {
+        botonNo.style.display = "none";
+        activarFinal();
+    }
+}
+
+function activarFinal() {
+    finalTexto.style.display = "block";
+
+    setInterval(() => {
+        const heart = document.createElement("div");
+        heart.classList.add("heart");
+        heart.innerHTML = "❤️";
+        heart.style.left = Math.random() * 100 + "vw";
+        document.body.appendChild(heart);
+
+        setTimeout(() => {
+            heart.remove();
+        }, 5000);
+    }, 300);
+}
+
+botonNo.addEventListener("mouseover", moverYContar);
+botonNo.addEventListener("click", moverYContar);
+
+function aceptar() {
+    alert("Sabía que dirías que sí 😌💖 Eres el amor de mi vida ❤️");
+}
+    </script>
+
+</body>
+</html>
